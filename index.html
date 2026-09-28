@@ -3,42 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Real-Time Log Anomaly Detector | Hackathon Edition</title>
+  <title>Real-Time Log Anomaly Detector</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #07090e;
-      --bg-surface: #0d121d;
-      --bg-panel: #111726;
-      --bg-card: #161e31;
-      --bg-card-hover: #1c263d;
-      --border-subtle: #1e293b;
-      --border-bright: #334155;
+      /* Light warm brown / Apple-inspired palette */
+      --bg-base: #f7f3ef;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f5f0eb;
+      --border-subtle: #e8e0d8;
+      --border-bright: #d4c8bc;
       
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
+      --text-main: #2c2522;
+      --text-muted: #6b5e55;
+      --text-dim: #9a8b7f;
 
-      --accent-cyan: #38bdf8;
-      --accent-indigo: #6366f1;
-      --accent-emerald: #10b981;
+      --accent: #a67c52;
+      --accent-soft: #c4a484;
+      --accent-warm: #8b6f47;
+      --accent-emerald: #3d9b7a;
       
-      --sev-warn: #fbbf24;
-      --sev-warn-bg: rgba(251, 191, 36, 0.12);
-      --sev-warn-border: #f59e0b;
+      --sev-warn: #c9892c;
+      --sev-warn-bg: rgba(201, 137, 44, 0.10);
+      --sev-warn-border: #d4a24a;
 
-      --sev-high: #fb923c;
-      --sev-high-bg: rgba(251, 146, 60, 0.14);
-      --sev-high-border: #ea580c;
+      --sev-high: #c26a2e;
+      --sev-high-bg: rgba(194, 106, 46, 0.10);
+      --sev-high-border: #d4844a;
 
-      --sev-crit: #f43f5e;
-      --sev-crit-bg: rgba(244, 63, 94, 0.18);
-      --sev-crit-border: #e11d48;
+      --sev-crit: #c44b5a;
+      --sev-crit-bg: rgba(196, 75, 90, 0.10);
+      --sev-crit-border: #d46a76;
 
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Outfit', 'DM Sans', sans-serif;
+      --font-heading: 'DM Sans', 'Inter', sans-serif;
       --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-soft: 0 1px 3px rgba(44, 37, 34, 0.04), 0 4px 12px rgba(44, 37, 34, 0.03);
+      --shadow-card: 0 2px 8px rgba(44, 37, 34, 0.05), 0 1px 2px rgba(44, 37, 34, 0.03);
     }
 
     * {
@@ -58,133 +66,137 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Top Navigation Header */
+    /* ── Header ── */
     header {
-      background: linear-gradient(180deg, #0f172a 0%, #0d121d 100%);
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0.65rem 1.25rem;
+      padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
       z-index: 20;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-soft);
     }
 
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.9rem;
     }
 
-    .brand-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+    /* Clean SVG logo */
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: linear-gradient(145deg, #a67c52 0%, #8b6f47 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 1.15rem;
-      color: #fff;
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+      box-shadow: 0 2px 8px rgba(166, 124, 82, 0.28);
+      flex-shrink: 0;
+    }
+
+    .brand-logo svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
     }
 
     .brand-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      line-height: 1.15;
     }
 
-    .hackathon-tag {
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      background: rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .brand-title span.accent {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .brand-subtitle {
+      font-family: var(--font-heading);
       font-size: 0.72rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
+      color: var(--text-dim);
+      margin-top: 0.12rem;
+      letter-spacing: 0.01em;
+      font-weight: 500;
     }
 
-    /* Telemetry KPI Bar */
+    /* KPI Bar */
     .telemetry-bar {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
     }
 
     .kpi-card {
-      background: var(--bg-surface);
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-sm);
+      padding: 0.35rem 0.75rem;
       display: flex;
       flex-direction: column;
-      min-width: 95px;
-      transition: border-color 0.2s ease;
+      min-width: 100px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-card);
     }
 
     .kpi-card:hover {
       border-color: var(--border-bright);
+      background: #f3ede7;
     }
 
     .kpi-label {
-      font-size: 0.62rem;
+      font-family: var(--font-heading);
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-dim);
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .kpi-value {
       font-family: var(--font-mono);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-main);
     }
 
     .kpi-value.val-highlight {
-      color: var(--accent-cyan);
+      color: var(--accent);
     }
 
-    /* Status Badges */
+    /* Status Badge */
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
       font-size: 0.72rem;
       font-weight: 600;
-      padding: 0.35rem 0.75rem;
+      padding: 0.38rem 0.85rem;
       border-radius: 9999px;
-      background: rgba(100, 116, 139, 0.15);
+      background: #f0ebe5;
       color: var(--text-muted);
       border: 1px solid var(--border-subtle);
       font-family: var(--font-mono);
     }
 
     .status-badge.connected {
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(61, 155, 122, 0.1);
       color: var(--accent-emerald);
-      border-color: rgba(16, 185, 129, 0.35);
+      border-color: rgba(61, 155, 122, 0.25);
     }
 
     .status-badge.disconnected {
-      background: rgba(244, 63, 94, 0.12);
+      background: rgba(196, 75, 90, 0.1);
       color: var(--sev-crit);
-      border-color: rgba(244, 63, 94, 0.35);
+      border-color: rgba(196, 75, 90, 0.25);
     }
 
     .pulse-dot {
@@ -195,20 +207,20 @@
     }
 
     .status-badge.connected .pulse-dot {
-      box-shadow: 0 0 8px currentColor;
+      box-shadow: 0 0 6px currentColor;
       animation: pulseAnim 1.8s infinite;
     }
 
     @keyframes pulseAnim {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
-    /* Baseline Status Banner */
+    /* Baseline Banner */
     .baseline-banner {
-      background: #090e18;
+      background: #f3ede7;
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0.45rem 1.25rem;
+      padding: 0.55rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -219,53 +231,54 @@
     .baseline-info {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
     .baseline-pill {
-      font-size: 0.65rem;
+      font-family: var(--font-heading);
+      font-size: 0.64rem;
       font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
     .baseline-pill.calibrating {
-      background: rgba(251, 191, 36, 0.15);
+      background: var(--sev-warn-bg);
       color: var(--sev-warn);
       border: 1px solid var(--sev-warn-border);
       animation: pulseAnim 2s infinite;
     }
 
     .baseline-pill.ready {
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(61, 155, 122, 0.12);
       color: var(--accent-emerald);
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      border: 1px solid rgba(61, 155, 122, 0.3);
     }
 
     .baseline-progress-bar {
       width: 120px;
       height: 6px;
-      background: var(--bg-surface);
+      background: #e8e0d8;
       border-radius: 3px;
       overflow: hidden;
-      border: 1px solid var(--border-subtle);
     }
 
     .baseline-progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #6366f1, #10b981);
+      background: linear-gradient(90deg, var(--accent), var(--accent-emerald));
       width: 0%;
       transition: width 0.3s ease;
     }
 
-    /* Main Workspace Split-Screen */
+    /* Workspace */
     .workspace {
       display: flex;
       flex: 1;
-      height: calc(100vh - 105px);
+      height: calc(100vh - 112px);
       overflow: hidden;
+      gap: 0;
     }
 
     .panel {
@@ -283,7 +296,7 @@
     .panel-header {
       background-color: var(--bg-surface);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 0.6rem 1rem;
+      padding: 0.7rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -292,10 +305,10 @@
     }
 
     .panel-title {
+      font-family: var(--font-heading);
       font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-weight: 650;
+      letter-spacing: 0.02em;
       color: var(--text-muted);
       display: flex;
       align-items: center;
@@ -303,13 +316,14 @@
     }
 
     .counter-badge {
-      background: var(--bg-card);
+      background: #f0ebe5;
       border: 1px solid var(--border-subtle);
-      font-size: 0.68rem;
-      padding: 0.1rem 0.45rem;
+      font-size: 0.66rem;
+      padding: 0.14rem 0.5rem;
       border-radius: 9999px;
       font-family: var(--font-mono);
       color: var(--text-main);
+      font-weight: 500;
     }
 
     .controls-group {
@@ -318,87 +332,106 @@
       gap: 0.45rem;
     }
 
+    /* Tactile Buttons – iOS style */
     .btn {
-      background: var(--bg-card);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
-      padding: 0.28rem 0.55rem;
-      border-radius: 4px;
+      padding: 0.35rem 0.7rem;
+      border-radius: 8px;
       font-size: 0.72rem;
       cursor: pointer;
-      font-family: var(--font-sans);
-      font-weight: 500;
+      font-family: var(--font-heading);
+      font-weight: 550;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
       user-select: none;
+      box-shadow: 0 1px 2px rgba(44, 37, 34, 0.04);
     }
 
     .btn:hover {
-      background: var(--bg-card-hover);
+      background: #f5f0eb;
       color: var(--text-main);
       border-color: var(--border-bright);
     }
 
+    .btn:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
     .btn.active {
-      background: #2563eb;
+      background: var(--accent);
       color: #fff;
-      border-color: #3b82f6;
+      border-color: var(--accent-warm);
+      box-shadow: 0 2px 6px rgba(166, 124, 82, 0.25);
+      font-weight: 600;
+    }
+
+    .btn.active:hover {
+      background: var(--accent-warm);
     }
 
     .btn-action-primary {
-      background: rgba(99, 102, 241, 0.2);
-      color: #c7d2fe;
-      border-color: rgba(99, 102, 241, 0.4);
+      background: linear-gradient(180deg, #b89168 0%, #a67c52 100%);
+      color: #fff;
+      border-color: #8b6f47;
+      box-shadow: 0 2px 6px rgba(166, 124, 82, 0.28);
     }
 
     .btn-action-primary:hover {
-      background: rgba(99, 102, 241, 0.35);
-      color: #fff;
+      background: linear-gradient(180deg, #c4a484 0%, #b89168 100%);
+    }
+
+    .btn-action-primary:active {
+      transform: scale(0.97);
     }
 
     .input-field {
-      background: var(--bg-base);
+      background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.32rem 0.6rem;
+      border-radius: 8px;
       font-size: 0.72rem;
       font-family: var(--font-mono);
       outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .input-field:focus {
-      border-color: var(--accent-cyan);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.15);
     }
 
-    /* Left Panel: Log Terminal */
+    /* Log Stream */
     .stream-viewport {
       flex: 1;
       overflow-y: auto;
-      padding: 0.65rem 0.85rem;
+      padding: 0.8rem 1rem;
       font-family: var(--font-mono);
       font-size: 0.78rem;
-      line-height: 1.5;
+      line-height: 1.55;
       display: flex;
       flex-direction: column;
-      gap: 0.18rem;
-      background: #06090e;
+      gap: 0.2rem;
+      background: #faf7f4;
     }
 
     .log-row {
       display: flex;
       align-items: flex-start;
       gap: 0.65rem;
-      padding: 0.22rem 0.4rem;
-      border-radius: 4px;
-      transition: background 0.1s ease;
+      padding: 0.28rem 0.5rem;
+      border-radius: 7px;
+      transition: background 0.12s ease;
       word-break: break-all;
     }
 
     .log-row:hover {
-      background-color: rgba(255, 255, 255, 0.03);
+      background-color: rgba(166, 124, 82, 0.06);
     }
 
     .log-ts {
@@ -408,25 +441,25 @@
     }
 
     .lvl-tag {
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      padding: 0.08rem 0.38rem;
-      border-radius: 3px;
+      padding: 0.12rem 0.42rem;
+      border-radius: 5px;
       text-transform: uppercase;
       flex-shrink: 0;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
 
     .lvl-INFO {
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(166, 124, 82, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(166, 124, 82, 0.2);
     }
 
     .lvl-DEBUG {
-      background: rgba(148, 163, 184, 0.1);
+      background: rgba(154, 139, 127, 0.1);
       color: var(--text-muted);
-      border: 1px solid rgba(148, 163, 184, 0.2);
+      border: 1px solid rgba(154, 139, 127, 0.18);
     }
 
     .lvl-WARNING {
@@ -436,37 +469,36 @@
     }
 
     .lvl-ERROR {
-      background: rgba(248, 113, 113, 0.16);
-      color: #f87171;
-      border: 1px solid rgba(248, 113, 113, 0.35);
+      background: var(--sev-high-bg);
+      color: var(--sev-high);
+      border: 1px solid var(--sev-high-border);
     }
 
     .lvl-CRITICAL, .lvl-FATAL {
       background: var(--sev-crit-bg);
-      color: #fff;
+      color: var(--sev-crit);
       border: 1px solid var(--sev-crit-border);
-      box-shadow: 0 0 8px rgba(244, 63, 94, 0.4);
     }
 
     .log-text {
-      color: #cbd5e1;
+      color: #e39764;
       flex: 1;
     }
 
     .log-row.err-burst {
-      background: rgba(244, 63, 94, 0.08);
-      border-left: 2px solid var(--sev-crit);
+      background: rgba(196, 75, 90, 0.06);
+      border-left: 3px solid var(--sev-crit);
     }
 
-    /* Right Panel: Alert Feed */
+    /* Alert Feed */
     .alerts-viewport {
       flex: 1;
       overflow-y: auto;
-      padding: 0.75rem 1rem;
+      padding: 0.9rem 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      background: #090d15;
+      gap: 0.85rem;
+      background: #ff952b;
     }
 
     .empty-state {
@@ -481,22 +513,21 @@
     }
 
     .empty-icon {
-      font-size: 2.8rem;
-      opacity: 0.4;
+      font-size: 2.6rem;
+      opacity: 0.45;
     }
 
-    /* Alert Card Styling */
     .alert-card {
       background: var(--bg-card);
-      border-radius: 8px;
-      padding: 0.9rem 1rem;
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
       border: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
       position: relative;
-      animation: cardSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      animation: cardSlide 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-card);
     }
 
     @keyframes cardSlide {
@@ -506,18 +537,18 @@
 
     .alert-card.sev-WARNING {
       border-left: 4px solid var(--sev-warn);
-      background: linear-gradient(90deg, rgba(251, 191, 36, 0.08) 0%, var(--bg-card) 45%);
+      background: linear-gradient(90deg, rgba(201, 137, 44, 0.06) 0%, var(--bg-card) 50%);
     }
 
     .alert-card.sev-HIGH {
       border-left: 4px solid var(--sev-high);
-      background: linear-gradient(90deg, rgba(251, 146, 60, 0.1) 0%, var(--bg-card) 50%);
+      background: linear-gradient(90deg, rgba(194, 106, 46, 0.07) 0%, var(--bg-card) 50%);
     }
 
     .alert-card.sev-CRITICAL {
       border-left: 4px solid var(--sev-crit);
-      background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, var(--bg-card) 60%);
-      box-shadow: 0 0 20px rgba(244, 63, 94, 0.22);
+      background: linear-gradient(90deg, rgba(196, 75, 90, 0.08) 0%, var(--bg-card) 55%);
+      box-shadow: 0 4px 16px rgba(196, 75, 90, 0.1);
     }
 
     .alert-top {
@@ -527,12 +558,13 @@
     }
 
     .alert-sev-badge {
-      font-size: 0.68rem;
-      font-weight: 800;
-      padding: 0.18rem 0.5rem;
-      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-size: 0.66rem;
+      font-weight: 700;
+      padding: 0.22rem 0.55rem;
+      border-radius: 6px;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
     }
 
     .sev-WARNING .alert-sev-badge {
@@ -549,9 +581,9 @@
 
     .sev-CRITICAL .alert-sev-badge {
       background: var(--sev-crit-bg);
-      color: #fff;
+      color: var(--sev-crit);
       border: 1px solid var(--sev-crit-border);
-      animation: pulseAnim 1.2s infinite;
+      animation: pulseAnim 1.3s infinite;
     }
 
     .alert-timestamp {
@@ -564,12 +596,12 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.5rem;
-      background: rgba(0, 0, 0, 0.35);
-      padding: 0.45rem 0.6rem;
-      border-radius: 6px;
+      background: #f7f3ef;
+      padding: 0.5rem 0.7rem;
+      border-radius: 9px;
       font-family: var(--font-mono);
       font-size: 0.72rem;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
     }
 
     .stat-item {
@@ -579,9 +611,12 @@
     }
 
     .stat-caption {
-      font-size: 0.6rem;
+      font-family: var(--font-heading);
+      font-size: 0.58rem;
       color: var(--text-dim);
       text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-weight: 600;
     }
 
     .stat-val-bold {
@@ -596,10 +631,10 @@
     .alert-snippet {
       font-family: var(--font-mono);
       font-size: 0.73rem;
-      background: #05070c;
-      padding: 0.45rem 0.65rem;
-      border-radius: 4px;
-      color: #e2e8f0;
+      background: #faf7f4;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      color: #3d342e;
       border: 1px solid var(--border-subtle);
       white-space: pre-wrap;
       word-break: break-all;
@@ -616,54 +651,36 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      font-size: 0.67rem;
+      font-size: 0.66rem;
       font-weight: 600;
-      padding: 0.15rem 0.45rem;
-      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
       font-family: var(--font-mono);
     }
 
     .aws-pill.dispatched {
-      background: rgba(16, 185, 129, 0.15);
+      background: rgba(61, 155, 122, 0.1);
       color: var(--accent-emerald);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      border: 1px solid rgba(61, 155, 122, 0.25);
     }
 
     .aws-pill.fallback {
-      background: rgba(99, 102, 241, 0.15);
-      color: #c7d2fe;
-      border: 1px solid rgba(99, 102, 241, 0.35);
+      background: rgba(166, 124, 82, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(166, 124, 82, 0.25);
     }
 
     .aws-pill.error {
-      background: rgba(244, 63, 94, 0.15);
+      background: rgba(196, 75, 90, 0.1);
       color: var(--sev-crit);
-      border: 1px solid rgba(244, 63, 94, 0.35);
+      border: 1px solid rgba(196, 75, 90, 0.25);
     }
 
-    .aws-pill.pending {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--sev-warn);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      animation: awsPendingPulse 1.2s ease-in-out infinite;
-    }
-
-    .aws-pill.throttled {
-      background: rgba(148, 163, 184, 0.15);
-      color: var(--text-dim);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    @keyframes awsPendingPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.45; }
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg-base); }
-    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+    /* Scrollbar – light style */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d4c8bc; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b8a99a; }
   </style>
 </head>
 <body>
@@ -671,13 +688,19 @@
   <!-- Top Global Header -->
   <header>
     <div class="brand-section">
-      <div class="brand-badge">⚡</div>
+      <div class="brand-logo">
+        <!-- Clean monitoring / radar style icon -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+          <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg>
+      </div>
       <div>
         <div class="brand-title">
-          <span>Log Anomaly Detector</span>
-          <span class="hackathon-tag">Forge.AI Hackathon</span>
+          Log <span class="accent">Anomaly</span> Detector
         </div>
-        <div class="brand-subtitle">Sliding Window • Z-Score Deviation • AWS Alerting</div>
+        <div class="brand-subtitle">Sliding Window · Z-Score · AWS Alerting</div>
       </div>
     </div>
 
@@ -765,7 +788,7 @@
       <div class="alerts-viewport" id="alerts-viewport">
         <div class="empty-state" id="empty-alerts-state">
           <div class="empty-icon">🛡️</div>
-          <div style="font-weight: 600; color: var(--text-muted);">No Anomalies Detected</div>
+          <div style="font-weight: 600; color: var(--text-muted); font-family: var(--font-heading);">No Anomalies Detected</div>
           <div style="font-size: 0.75rem;">Logs are operating within established statistical baseline variance.</div>
         </div>
       </div>
@@ -806,7 +829,7 @@
     const logFilterBox = document.getElementById('log-filter-box');
     const alertFilterSelect = document.getElementById('alert-filter-select');
 
-    // Web Audio synthesizer for alert sound (Zero external asset dependencies!)
+    // Web Audio synthesizer for alert sound
     function playAlertChime(severity) {
       if (!soundEnabled) return;
       try {
@@ -819,7 +842,7 @@
         gain.connect(audioCtx.destination);
 
         if (severity === 'CRITICAL') {
-          osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch alarm
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime);
           osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.3);
           gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
           gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
@@ -832,9 +855,7 @@
           osc.start();
           osc.stop(audioCtx.currentTime + 0.2);
         }
-      } catch (e) {
-        // Audio policy or unsupported
-      }
+      } catch (e) {}
     }
 
     // Sound toggle
@@ -951,40 +972,6 @@
       if (metrics) updateMetrics(metrics);
     }
 
-    // AWS dispatch badge (shared by initial alert render and async dispatch updates)
-    function buildAwsBadge(d) {
-      if (!d) return '';
-      if (d.pending) {
-        return `<span class="aws-pill pending">⏳ AWS Dispatching…</span>`;
-      }
-      if (d.sns_published || d.cloudwatch_logged) {
-        const id = d.message_id ? d.message_id.slice(-8) : 'OK';
-        return `<span class="aws-pill dispatched">🚀 AWS Alert Pushed (${id})</span>`;
-      }
-      if (d.fallback_active) {
-        return `<span class="aws-pill fallback">🛡️ AWS Fallback Active (Local Mode)</span>`;
-      }
-      if (d.attempted === false && d.reason) {
-        return `<span class="aws-pill throttled">⚠️ ${escapeHtml(d.reason)}</span>`;
-      }
-      if (d.attempted) {
-        return `<span class="aws-pill error">⚠️ AWS Dispatch Failed / Retried</span>`;
-      }
-      return '';
-    }
-
-    // Replace the badge on an existing alert card once background AWS dispatch finishes
-    function updateAwsBadge(alertId, dispatch) {
-      if (!alertId) return;
-      const card = alertsViewport.querySelector(`.alert-card[data-alert-id="${CSS.escape(alertId)}"]`);
-      if (!card) return;
-      const footer = card.querySelector('.alert-footer');
-      if (!footer) return;
-      const old = footer.querySelector('.aws-pill');
-      if (old) old.remove();
-      footer.insertAdjacentHTML('beforeend', buildAwsBadge(dispatch));
-    }
-
     // Append Alert Card
     function appendAlert(anomaly) {
       emptyAlertsState.style.display = 'none';
@@ -996,9 +983,19 @@
       const card = document.createElement('div');
       card.className = `alert-card sev-${anomaly.severity}`;
       card.setAttribute('data-severity', anomaly.severity);
-      if (anomaly.alert_id) card.setAttribute('data-alert-id', anomaly.alert_id);
 
-      const awsBadgeHtml = buildAwsBadge(anomaly.aws_dispatch);
+      let awsBadgeHtml = '';
+      if (anomaly.aws_dispatch) {
+        const d = anomaly.aws_dispatch;
+        if (d.sns_published || d.cloudwatch_logged) {
+          const id = d.message_id ? d.message_id.slice(-8) : 'OK';
+          awsBadgeHtml = `<span class="aws-pill dispatched">🚀 AWS Alert Pushed (${id})</span>`;
+        } else if (d.fallback_active) {
+          awsBadgeHtml = `<span class="aws-pill fallback">🛡️ AWS Fallback Active (Local Mode)</span>`;
+        } else if (d.attempted && !d.sns_published) {
+          awsBadgeHtml = `<span class="aws-pill error">⚠️ AWS Dispatch Throttled / Retried</span>`;
+        }
+      }
 
       const zDev = anomaly.z_score >= 0 ? `+${anomaly.z_score}` : anomaly.z_score;
       const sevClass = anomaly.severity === 'CRITICAL' ? 'deviation-crit' : (anomaly.severity === 'HIGH' ? 'deviation-high' : 'deviation-warn');
@@ -1109,8 +1106,6 @@
             updateZScoreDisplay(msg.data.z_score);
           } else if (msg.type === 'baseline_updated') {
             updateBaselineUI(msg.data);
-          } else if (msg.type === 'aws_dispatch_update') {
-            updateAwsBadge(msg.data.alert_id, msg.data.aws_dispatch);
           }
         } catch (err) {
           console.error('Error handling WebSocket frame:', err);
