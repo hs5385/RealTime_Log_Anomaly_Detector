@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Log Anomaly Detector | Hackathon Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #07090e;
+      --bg-surface: #0d121d;
+      --bg-panel: #111726;
+      --bg-card: #161e31;
+      --bg-card-hover: #1c263d;
+      --border-subtle: #1e293b;
+      --border-bright: #334155;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      
+      --sev-warn: #fbbf24;
+      --sev-warn-bg: rgba(251, 191, 36, 0.12);
+      --sev-warn-border: #f59e0b;
+
+      --sev-high: #fb923c;
+      --sev-high-bg: rgba(251, 146, 60, 0.14);
+      --sev-high-border: #ea580c;
+
+      --sev-crit: #f43f5e;
+      --sev-crit-bg: rgba(244, 63, 94, 0.18);
+      --sev-crit-border: #e11d48;
+
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background: linear-gradient(180deg, #0f172a 0%, #0d121d 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      z-index: 20;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.45);
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hackathon-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Telemetry KPI Bar */
+    .telemetry-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 0.3rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      min-width: 95px;
+      transition: border-color 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      border-color: var(--border-bright);
+    }
+
+    .kpi-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+
+    .kpi-value {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .kpi-value.val-highlight {
+      color: var(--accent-cyan);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      background: rgba(100, 116, 139, 0.15);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+    }
+
+    .status-badge.connected {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .status-badge.disconnected {
+      background: rgba(244, 63, 94, 0.12);
+      color: var(--sev-crit);
+      border-color: rgba(244, 63, 94, 0.35);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .status-badge.connected .pulse-dot {
+      box-shadow: 0 0 8px currentColor;
+      animation: pulseAnim 1.8s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    /* Baseline Status Banner */
+    .baseline-banner {
+      background: #090e18;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.45rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      gap: 1rem;
+    }
+
+    .baseline-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .baseline-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .baseline-pill.calibrating {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--sev-warn);
+      border: 1px solid var(--sev-warn-border);
+      animation: pulseAnim 2s infinite;
+    }
+
+    .baseline-pill.ready {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .baseline-progress-bar {
+      width: 120px;
+      height: 6px;
+      background: var(--bg-surface);
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .baseline-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6366f1, #10b981);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Main Workspace Split-Screen */
+    .workspace {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 105px);
+      overflow: hidden;
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background-color: var(--bg-base);
+    }
+
+    .panel-left {
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .panel-header {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.6rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .counter-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.68rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.28rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      border-color: var(--border-bright);
+    }
+
+    .btn.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #3b82f6;
+    }
+
+    .btn-action-primary {
+      background: rgba(99, 102, 241, 0.2);
+      color: #c7d2fe;
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-action-primary:hover {
+      background: rgba(99, 102, 241, 0.35);
+      color: #fff;
+    }
+
+    .input-field {
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* Left Panel: Log Terminal */
+    .stream-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.65rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+      background: #06090e;
+    }
+
+    .log-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding: 0.22rem 0.4rem;
+      border-radius: 4px;
+      transition: background 0.1s ease;
+      word-break: break-all;
+    }
+
+    .log-row:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .log-ts {
+      color: var(--text-dim);
+      flex-shrink: 0;
+      font-size: 0.72rem;
+    }
+
+    .lvl-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.08rem 0.38rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .lvl-INFO {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .lvl-DEBUG {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .lvl-WARNING {
+      background: var(--sev-warn-bg);
+      color: var(--sev-warn);
+      border: 1px solid var(--sev-warn-border);
+    }
+
+    .lvl-ERROR {
+      background: rgba(248, 113, 113, 0.16);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.35);
+    }
+
+    .lvl-CRITICAL, .lvl-FATAL {
+      background: var(--sev-crit-bg);
+      color: #fff;
+      border: 1px solid var(--sev-crit-border);
+      box-shadow: 0 0 8px rgba(244, 63, 94, 0.4);
+    }
+
+    .log-text {
+      color: #cbd5e1;
+      flex: 1;
+    }
+
+    .log-row.err-burst {
+      background: rgba(244, 63, 94, 0.08);
+      border-left: 2px solid var(--sev-crit);
+    }
+
+    /* Right Panel: Alert Feed */
+    .alerts-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: #090d15;
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--text-dim);
+      text-align: center;
+      gap: 0.6rem;
+    }
+
+    .empty-icon {
+      font-size: 2.8rem;
+      opacity: 0.4;
+    }
+
+    /* Alert Card Styling */
+    .alert-card {
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      position: relative;
+      animation: cardSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    @keyframes cardSlide {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-card.sev-WARNING {
+      border-left: 4px solid var(--sev-warn);
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.08) 0%, var(--bg-card) 45%);
+    }
+
+    .alert-card.sev-HIGH {
+      border-left: 4px solid var(--sev-high);
+      background: linear-gradient(90deg, rgba(251, 146, 60, 0.1) 0%, var(--bg-card) 50%);
+    }
+
+    .alert-card.sev-CRITICAL {
+      border-left: 4px solid var(--sev-crit);
+      background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, var(--bg-card) 60%);
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.22);
+    }
+
+    .alert-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .alert-sev-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .sev-WARNING .alert-sev-badge {
+      background: var(--sev-warn-bg);
+      color: var(--sev-warn);
+      border: 1px solid var(--sev-warn-border);
+    }
+
+    .sev-HIGH .alert-sev-badge {
+      background: var(--sev-high-bg);
+      color: var(--sev-high);
+      border: 1px solid var(--sev-high-border);
+    }
+
+    .sev-CRITICAL .alert-sev-badge {
+      background: var(--sev-crit-bg);
+      color: #fff;
+      border: 1px solid var(--sev-crit-border);
+      animation: pulseAnim 1.2s infinite;
+    }
+
+    .alert-timestamp {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .alert-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.45rem 0.6rem;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .stat-caption {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .stat-val-bold {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stat-val-bold.deviation-warn { color: var(--sev-warn); }
+    .stat-val-bold.deviation-high { color: var(--sev-high); }
+    .stat-val-bold.deviation-crit { color: var(--sev-crit); }
+
+    .alert-snippet {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      background: #05070c;
+      padding: 0.45rem 0.65rem;
+      border-radius: 4px;
+      color: #e2e8f0;
+      border: 1px solid var(--border-subtle);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .alert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.15rem;
+    }
+
+    .aws-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.67rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .aws-pill.dispatched {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .aws-pill.fallback {
+      background: rgba(99, 102, 241, 0.15);
+      color: #c7d2fe;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+    }
+
+    .aws-pill.error {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--sev-crit);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+
+    .aws-pill.pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--sev-warn);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      animation: awsPendingPulse 1.2s ease-in-out infinite;
+    }
+
+    .aws-pill.throttled {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-dim);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    @keyframes awsPendingPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Global Header -->
+  <header>
+    <div class="brand-section">
+      <div class="brand-badge">⚡</div>
+      <div>
+        <div class="brand-title">
+          <span>Log Anomaly Detector</span>
+          <span class="hackathon-tag">Forge.AI Hackathon</span>
+        </div>
+        <div class="brand-subtitle">Sliding Window • Z-Score Deviation • AWS Alerting</div>
+      </div>
+    </div>
+
+    <!-- Live Telemetry KPI Bar -->
+    <div class="telemetry-bar">
+      <div class="kpi-card">
+        <span class="kpi-label">Statistical Z-Score</span>
+        <span class="kpi-value" id="kpi-zscore">0.00σ</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Rolling Error Rate</span>
+        <span class="kpi-value val-highlight" id="kpi-rate">0.0 /min</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Sliding Window (60s)</span>
+        <span class="kpi-value" id="kpi-window">0 err / 0 log</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Learned Baseline</span>
+        <span class="kpi-value" id="kpi-baseline">μ=1.5 | σ=1.0</span>
+      </div>
+      <div class="status-badge" id="ws-badge">
+        <span class="pulse-dot"></span>
+        <span id="ws-status-text">CONNECTING</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Baseline Establishment Banner -->
+  <section class="baseline-banner">
+    <div class="baseline-info">
+      <span class="baseline-pill calibrating" id="baseline-status-pill">CALIBRATING BASELINE</span>
+      <span id="baseline-desc" style="color: var(--text-muted);">
+        Observing normal log traffic to establish error baseline before alerts...
+      </span>
+      <div class="baseline-progress-bar" id="baseline-prog-container">
+        <div class="baseline-progress-fill" id="baseline-progress-bar"></div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button class="btn btn-action-primary" id="btn-force-baseline" title="Instantly confirm baseline for testing">
+        ⚡ Confirm Baseline Now
+      </button>
+      <button class="btn" id="btn-toggle-sound">🔊 Sound: ON</button>
+    </div>
+  </section>
+
+  <!-- Split Screen Workspace -->
+  <main class="workspace">
+    <!-- Left Panel: Raw Log Stream -->
+    <section class="panel panel-left">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>📜 Live Log Stream (app.log)</span>
+          <span class="counter-badge" id="log-total-counter">0 lines</span>
+        </div>
+        <div class="controls-group">
+          <input type="text" id="log-filter-box" class="input-field" placeholder="Filter logs..." style="width: 130px;" />
+          <button id="btn-autoscroll" class="btn active">⬇ Auto-scroll</button>
+          <button id="btn-clear-logs" class="btn">Clear</button>
+        </div>
+      </div>
+      <div class="stream-viewport" id="log-viewport">
+        <!-- Live logs injected here -->
+      </div>
+    </section>
+
+    <!-- Right Panel: Anomaly & Alert Feed -->
+    <section class="panel panel-right">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>🚨 Anomaly & Alert Feed</span>
+          <span class="counter-badge" id="alert-total-counter">0 alerts</span>
+        </div>
+        <div class="controls-group">
+          <select id="alert-filter-select" class="input-field" style="width: 115px;">
+            <option value="ALL">All Severities</option>
+            <option value="CRITICAL">Critical</option>
+            <option value="HIGH">High</option>
+            <option value="WARNING">Warning</option>
+          </select>
+          <button id="btn-clear-alerts" class="btn">Clear Alerts</button>
+        </div>
+      </div>
+      <div class="alerts-viewport" id="alerts-viewport">
+        <div class="empty-state" id="empty-alerts-state">
+          <div class="empty-icon">🛡️</div>
+          <div style="font-weight: 600; color: var(--text-muted);">No Anomalies Detected</div>
+          <div style="font-size: 0.75rem;">Logs are operating within established statistical baseline variance.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // State
+    const MAX_DOM_LOGS = 600;
+    const MAX_DOM_ALERTS = 150;
+    let autoScroll = true;
+    let soundEnabled = true;
+    let totalLogsCount = 0;
+    let totalAlertsCount = 0;
+    let audioCtx = null;
+
+    // DOM References
+    const logViewport = document.getElementById('log-viewport');
+    const alertsViewport = document.getElementById('alerts-viewport');
+    const emptyAlertsState = document.getElementById('empty-alerts-state');
+    const logTotalCounter = document.getElementById('log-total-counter');
+    const alertTotalCounter = document.getElementById('alert-total-counter');
+    const wsBadge = document.getElementById('ws-badge');
+    const wsStatusText = document.getElementById('ws-status-text');
+    const kpiZScore = document.getElementById('kpi-zscore');
+    const kpiRate = document.getElementById('kpi-rate');
+    const kpiWindow = document.getElementById('kpi-window');
+    const kpiBaseline = document.getElementById('kpi-baseline');
+    const baselineStatusPill = document.getElementById('baseline-status-pill');
+    const baselineDesc = document.getElementById('baseline-desc');
+    const baselineProgressBar = document.getElementById('baseline-progress-bar');
+    const baselineProgContainer = document.getElementById('baseline-prog-container');
+    const btnForceBaseline = document.getElementById('btn-force-baseline');
+    const btnToggleSound = document.getElementById('btn-toggle-sound');
+    const btnAutoScroll = document.getElementById('btn-autoscroll');
+    const btnClearLogs = document.getElementById('btn-clear-logs');
+    const btnClearAlerts = document.getElementById('btn-clear-alerts');
+    const logFilterBox = document.getElementById('log-filter-box');
+    const alertFilterSelect = document.getElementById('alert-filter-select');
+
+    // Web Audio synthesizer for alert sound (Zero external asset dependencies!)
+    function playAlertChime(severity) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (severity === 'CRITICAL') {
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch alarm
+          osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.3);
+        } else if (severity === 'HIGH') {
+          osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.2);
+        }
+      } catch (e) {
+        // Audio policy or unsupported
+      }
+    }
+
+    // Sound toggle
+    btnToggleSound.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      btnToggleSound.textContent = soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+    });
+
+    // Auto-scroll toggle
+    btnAutoScroll.addEventListener('click', () => {
+      autoScroll = !autoScroll;
+      btnAutoScroll.classList.toggle('active', autoScroll);
+    });
+
+    // Clear logs
+    btnClearLogs.addEventListener('click', () => {
+      logViewport.innerHTML = '';
+      totalLogsCount = 0;
+      logTotalCounter.textContent = '0 lines';
+    });
+
+    // Clear alerts
+    btnClearAlerts.addEventListener('click', () => {
+      alertsViewport.querySelectorAll('.alert-card').forEach(el => el.remove());
+      totalAlertsCount = 0;
+      alertTotalCounter.textContent = '0 alerts';
+      emptyAlertsState.style.display = 'flex';
+    });
+
+    // Filter handlers
+    logFilterBox.addEventListener('input', () => {
+      const q = logFilterBox.value.toLowerCase().trim();
+      const rows = logViewport.querySelectorAll('.log-row');
+      rows.forEach(r => {
+        r.style.display = r.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    alertFilterSelect.addEventListener('change', () => {
+      const chosen = alertFilterSelect.value;
+      const cards = alertsViewport.querySelectorAll('.alert-card');
+      let visible = 0;
+      cards.forEach(c => {
+        const sev = c.getAttribute('data-severity');
+        if (chosen === 'ALL' || sev === chosen) {
+          c.style.display = 'flex';
+          visible++;
+        } else {
+          c.style.display = 'none';
+        }
+      });
+      emptyAlertsState.style.display = (cards.length > 0 && visible === 0) ? 'flex' : (cards.length === 0 ? 'flex' : 'none');
+    });
+
+    // Force establish baseline button
+    btnForceBaseline.addEventListener('click', async () => {
+      try {
+        const res = await fetch('/api/force-baseline', { method: 'POST' });
+        const data = await res.json();
+        if (data.baseline) updateBaselineUI(data.baseline);
+      } catch (err) {
+        console.error('Error forcing baseline:', err);
+      }
+    });
+
+    // Baseline UI Update
+    function updateBaselineUI(baseline) {
+      if (!baseline) return;
+      kpiBaseline.textContent = `μ=${baseline.mean} | σ=${baseline.std}`;
+
+      if (baseline.established) {
+        baselineStatusPill.className = 'baseline-pill ready';
+        baselineStatusPill.textContent = 'BASELINE ESTABLISHED';
+        baselineDesc.textContent = `Normal behavior calibrated (μ=${baseline.mean} err/min, σ=${baseline.std}). Anomaly detection active.`;
+        baselineProgContainer.style.display = 'none';
+        btnForceBaseline.style.display = 'none';
+      } else {
+        baselineStatusPill.className = 'baseline-pill calibrating';
+        baselineStatusPill.textContent = `CALIBRATING (${baseline.samples_collected}/${baseline.min_samples_required})`;
+        baselineDesc.textContent = `Observing normal traffic to establish baseline (${baseline.progress_percent}% complete)...`;
+        baselineProgContainer.style.display = 'block';
+        baselineProgressBar.style.width = `${baseline.progress_percent}%`;
+        btnForceBaseline.style.display = 'inline-flex';
+      }
+    }
+
+    // Append Log Line
+    function appendLog(logData, metrics) {
+      totalLogsCount++;
+      logTotalCounter.textContent = `${totalLogsCount} lines`;
+
+      const row = document.createElement('div');
+      const isErr = logData.is_error;
+      const lvl = logData.level || 'INFO';
+      row.className = `log-row ${isErr ? 'err-burst' : ''}`;
+
+      const timeStr = new Date(logData.timestamp * 1000).toLocaleTimeString();
+      row.innerHTML = `
+        <span class="log-ts">${timeStr}</span>
+        <span class="lvl-tag lvl-${lvl}">${lvl}</span>
+        <span class="log-text">${escapeHtml(logData.raw)}</span>
+      `;
+
+      logViewport.appendChild(row);
+
+      if (logViewport.children.length > MAX_DOM_LOGS) {
+        logViewport.removeChild(logViewport.children[0]);
+      }
+
+      if (autoScroll) {
+        logViewport.scrollTop = logViewport.scrollHeight;
+      }
+
+      if (metrics) updateMetrics(metrics);
+    }
+
+    // AWS dispatch badge (shared by initial alert render and async dispatch updates)
+    function buildAwsBadge(d) {
+      if (!d) return '';
+      if (d.pending) {
+        return `<span class="aws-pill pending">⏳ AWS Dispatching…</span>`;
+      }
+      if (d.sns_published || d.cloudwatch_logged) {
+        const id = d.message_id ? d.message_id.slice(-8) : 'OK';
+        return `<span class="aws-pill dispatched">🚀 AWS Alert Pushed (${id})</span>`;
+      }
+      if (d.fallback_active) {
+        return `<span class="aws-pill fallback">🛡️ AWS Fallback Active (Local Mode)</span>`;
+      }
+      if (d.attempted === false && d.reason) {
+        return `<span class="aws-pill throttled">⚠️ ${escapeHtml(d.reason)}</span>`;
+      }
+      if (d.attempted) {
+        return `<span class="aws-pill error">⚠️ AWS Dispatch Failed / Retried</span>`;
+      }
+      return '';
+    }
+
+    // Replace the badge on an existing alert card once background AWS dispatch finishes
+    function updateAwsBadge(alertId, dispatch) {
+      if (!alertId) return;
+      const card = alertsViewport.querySelector(`.alert-card[data-alert-id="${CSS.escape(alertId)}"]`);
+      if (!card) return;
+      const footer = card.querySelector('.alert-footer');
+      if (!footer) return;
+      const old = footer.querySelector('.aws-pill');
+      if (old) old.remove();
+      footer.insertAdjacentHTML('beforeend', buildAwsBadge(dispatch));
+    }
+
+    // Append Alert Card
+    function appendAlert(anomaly) {
+      emptyAlertsState.style.display = 'none';
+      totalAlertsCount++;
+      alertTotalCounter.textContent = `${totalAlertsCount} alerts`;
+
+      playAlertChime(anomaly.severity);
+
+      const card = document.createElement('div');
+      card.className = `alert-card sev-${anomaly.severity}`;
+      card.setAttribute('data-severity', anomaly.severity);
+      if (anomaly.alert_id) card.setAttribute('data-alert-id', anomaly.alert_id);
+
+      const awsBadgeHtml = buildAwsBadge(anomaly.aws_dispatch);
+
+      const zDev = anomaly.z_score >= 0 ? `+${anomaly.z_score}` : anomaly.z_score;
+      const sevClass = anomaly.severity === 'CRITICAL' ? 'deviation-crit' : (anomaly.severity === 'HIGH' ? 'deviation-high' : 'deviation-warn');
+
+      card.innerHTML = `
+        <div class="alert-top">
+          <span class="alert-sev-badge">${anomaly.severity}</span>
+          <span class="alert-timestamp">${anomaly.formatted_time || new Date(anomaly.timestamp * 1000).toLocaleTimeString()}</span>
+        </div>
+        <div class="alert-stats-grid">
+          <div class="stat-item">
+            <span class="stat-caption">Z-Score Deviation</span>
+            <span class="stat-val-bold ${sevClass}">${zDev}σ</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-caption">Rolling Rate</span>
+            <span class="stat-val-bold">${anomaly.current_error_rate} /min</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-caption">Baseline (μ ± σ)</span>
+            <span class="stat-val-bold">${anomaly.baseline_mean} ± ${anomaly.baseline_std}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-caption">Window Errors</span>
+            <span class="stat-val-bold">${anomaly.window_errors} / ${anomaly.window_total_logs} (${anomaly.error_percentage || 0}%)</span>
+          </div>
+        </div>
+        <div class="alert-snippet">${escapeHtml(anomaly.triggering_log)}</div>
+        <div class="alert-footer">
+          <span style="font-size: 0.68rem; color: var(--text-dim);">Trigger: Log Level [${anomaly.log_level}]</span>
+          ${awsBadgeHtml}
+        </div>
+      `;
+
+      alertsViewport.insertBefore(card, alertsViewport.firstChild);
+
+      if (alertsViewport.querySelectorAll('.alert-card').length > MAX_DOM_ALERTS) {
+        alertsViewport.removeChild(alertsViewport.lastElementChild);
+      }
+    }
+
+    // Telemetry updates
+    function updateMetrics(metrics) {
+      if (!metrics) return;
+      kpiRate.textContent = `${metrics.error_rate_per_min} /min`;
+      kpiWindow.textContent = `${metrics.error_count} err / ${metrics.total_logs} log (${metrics.error_percentage || 0}%)`;
+    }
+
+    function updateZScoreDisplay(z) {
+      kpiZScore.textContent = `${z >= 0 ? '+' : ''}${z.toFixed(2)}σ`;
+      if (z >= 4.5) {
+        kpiZScore.style.color = 'var(--sev-crit)';
+      } else if (z >= 3.0) {
+        kpiZScore.style.color = 'var(--sev-high)';
+      } else if (z >= 2.0) {
+        kpiZScore.style.color = 'var(--sev-warn)';
+      } else {
+        kpiZScore.style.color = 'var(--text-main)';
+      }
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    // WebSocket Client
+    let ws = null;
+    let reconnectDelay = 1000;
+
+    function connectWS() {
+      const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const url = `${proto}//${window.location.host}/ws`;
+
+      wsBadge.className = 'status-badge';
+      wsStatusText.textContent = 'CONNECTING';
+
+      try {
+        ws = new WebSocket(url);
+      } catch (e) {
+        scheduleReconnect();
+        return;
+      }
+
+      ws.onopen = () => {
+        wsBadge.className = 'status-badge connected';
+        wsStatusText.textContent = 'LIVE WS';
+        reconnectDelay = 1000;
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          if (msg.type === 'init') {
+            updateBaselineUI(msg.data.baseline);
+            updateMetrics(msg.data.metrics);
+            updateZScoreDisplay(msg.data.current_z_score);
+          } else if (msg.type === 'log') {
+            appendLog(msg.data, msg.metrics);
+            if (msg.baseline) updateBaselineUI(msg.baseline);
+          } else if (msg.type === 'anomaly') {
+            appendAlert(msg.data);
+            updateZScoreDisplay(msg.data.z_score);
+            if (msg.baseline) updateBaselineUI(msg.baseline);
+          } else if (msg.type === 'heartbeat') {
+            updateMetrics(msg.data.metrics);
+            updateBaselineUI(msg.data.baseline);
+            updateZScoreDisplay(msg.data.z_score);
+          } else if (msg.type === 'baseline_updated') {
+            updateBaselineUI(msg.data);
+          } else if (msg.type === 'aws_dispatch_update') {
+            updateAwsBadge(msg.data.alert_id, msg.data.aws_dispatch);
+          }
+        } catch (err) {
+          console.error('Error handling WebSocket frame:', err);
+        }
+      };
+
+      ws.onclose = () => {
+        wsBadge.className = 'status-badge disconnected';
+        wsStatusText.textContent = 'DISCONNECTED';
+        scheduleReconnect();
+      };
+
+      ws.onerror = () => {
+        ws.close();
+      };
+    }
+
+    function scheduleReconnect() {
+      setTimeout(() => {
+        connectWS();
+        reconnectDelay = Math.min(reconnectDelay * 1.5, 8000);
+      }, reconnectDelay);
+    }
+
+    // Initialize
+    connectWS();
+  </script>
+</body>
+</html>

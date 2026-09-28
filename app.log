@@ -1,0 +1,500 @@
+2026-09-28 12:27:39.672 [CRITICAL] [payment-gateway] Cascading circuit breaker tripped for payment-gateway: failure rate exceeded 65%
+2026-09-28 12:27:39.764 [ERROR] [database-cluster] Failed to acquire distributed lock 'lock:inventory:SKU-322' within 5000ms
+2026-09-28 12:27:39.827 [CRITICAL] [payment-gateway] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:27:39.889 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:27:40.018 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:36:44.575 [ERROR] [order-processor] Transaction deadlock detected while processing order #325909; rolled back
+2026-09-28 12:36:44.713 [ERROR] [redis-cache] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 12:36:44.791 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 12:36:44.925 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_7767
+2026-09-28 12:36:45.035 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:59:29.521 [DEBUG] [notification-worker] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 12:59:29.872 [DEBUG] [database-cluster] Cache lookup for key 'user_profile:3633' - HIT (2.1ms)
+2026-09-28 12:59:30.222 [DEBUG] [api-gateway] Cache lookup for key 'user_profile:1364' - HIT (2.1ms)
+2026-09-28 12:59:30.573 [INFO] [order-processor] Order #760705 status updated to PROCESSING
+2026-09-28 12:59:30.925 [DEBUG] [notification-worker] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 12:59:31.276 [INFO] [payment-gateway] Notification dispatched to user_2931@example.com via SES
+2026-09-28 12:59:31.628 [DEBUG] [auth-service] Cache lookup for key 'user_profile:3771' - HIT (2.1ms)
+2026-09-28 12:59:31.979 [INFO] [auth-service] Payment intent confirmed: id=pi_936089 amount=$282.47
+2026-09-28 12:59:32.330 [INFO] [inventory-api] User session verified: user_id=7836 token_type=Bearer
+2026-09-28 12:59:32.682 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-972' - 12ms
+2026-09-28 12:59:33.034 [INFO] [redis-cache] Notification dispatched to user_9866@example.com via SES
+2026-09-28 12:59:33.385 [INFO] [redis-cache] Notification dispatched to user_2693@example.com via SES
+2026-09-28 12:59:33.737 [INFO] [notification-worker] Inventory reservation confirmed for SKU: SKU-443 qty=1
+2026-09-28 12:59:34.088 [INFO] [redis-cache] User session verified: user_id=8882 token_type=Bearer
+2026-09-28 12:59:34.444 [INFO] [api-gateway] Order #838825 status updated to PROCESSING
+2026-09-28 12:59:34.795 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-365' - 12ms
+2026-09-28 12:59:35.147 [INFO] [auth-service] User session verified: user_id=7428 token_type=Bearer
+2026-09-28 12:59:35.499 [INFO] [order-processor] Inventory reservation confirmed for SKU: SKU-552 qty=1
+2026-09-28 12:59:37.351 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 12:59:37.852 [ERROR] [database-cluster] Transient socket timeout contacting inventory-service; retrying attempt 1/3
+2026-09-28 12:59:38.353 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 12:59:41.856 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:59:41.991 [ERROR] [database-cluster] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 12:59:42.106 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 12:59:42.194 [ERROR] [order-processor] Transaction deadlock detected while processing order #742311; rolled back
+2026-09-28 12:59:42.261 [ERROR] [order-processor] Transaction deadlock detected while processing order #968371; rolled back
+2026-09-28 12:59:42.375 [ERROR] [database-cluster] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 12:59:42.471 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 12:59:42.578 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_1281
+2026-09-28 12:59:42.704 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_5243
+2026-09-28 12:59:42.792 [ERROR] [order-processor] Transaction deadlock detected while processing order #991741; rolled back
+2026-09-28 12:59:42.930 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 12:59:43.026 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_7034
+2026-09-28 12:59:43.146 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_9438
+2026-09-28 12:59:43.219 [CRITICAL] [payment-gateway] Security event: potential brute-force authentication spike detected for user_2918
+2026-09-28 12:59:43.349 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 12:59:43.484 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_9318
+2026-09-28 12:59:43.621 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:7630' - HIT (2.1ms)
+2026-09-28 12:59:44.122 [DEBUG] [database-cluster] Cache lookup for key 'user_profile:4705' - HIT (2.1ms)
+2026-09-28 12:59:44.623 [INFO] [order-processor] Order #193306 status updated to PROCESSING
+2026-09-28 12:59:45.126 [INFO] [auth-service] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 12:59:45.627 [INFO] [notification-worker] Inventory reservation confirmed for SKU: SKU-343 qty=1
+2026-09-28 12:59:46.128 [INFO] [database-cluster] Notification dispatched to user_8906@example.com via SES
+2026-09-28 12:59:46.629 [INFO] [api-gateway] User session verified: user_id=6624 token_type=Bearer
+2026-09-28 12:59:47.131 [DEBUG] [payment-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 12:59:47.632 [INFO] [auth-service] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 12:59:48.133 [INFO] [database-cluster] Order #985487 status updated to PROCESSING
+2026-09-28 12:59:48.634 [DEBUG] [order-processor] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 12:59:49.136 [DEBUG] [api-gateway] Cache lookup for key 'user_profile:3674' - HIT (2.1ms)
+2026-09-28 12:59:49.638 [DEBUG] [payment-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-786' - 12ms
+2026-09-28 12:59:50.141 [DEBUG] [notification-worker] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 12:59:50.642 [INFO] [redis-cache] User session verified: user_id=2832 token_type=Bearer
+2026-09-28 13:01:43.640 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:01:43.991 [INFO] [api-gateway] Order #532684 status updated to PROCESSING
+2026-09-28 13:01:44.342 [DEBUG] [notification-worker] Database query execution: SELECT * FROM items WHERE sku='SKU-681' - 12ms
+2026-09-28 13:01:44.698 [INFO] [api-gateway] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:01:45.050 [DEBUG] [database-cluster] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:01:45.401 [INFO] [database-cluster] Notification dispatched to user_3635@example.com via SES
+2026-09-28 13:01:45.752 [INFO] [auth-service] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:01:46.103 [INFO] [auth-service] Notification dispatched to user_5620@example.com via SES
+2026-09-28 13:01:46.455 [DEBUG] [auth-service] Cache lookup for key 'user_profile:4797' - HIT (2.1ms)
+2026-09-28 13:01:46.807 [INFO] [auth-service] Payment intent confirmed: id=pi_508929 amount=$265.99
+2026-09-28 13:01:47.158 [INFO] [api-gateway] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:01:47.509 [INFO] [payment-gateway] User session verified: user_id=7064 token_type=Bearer
+2026-09-28 13:01:47.861 [INFO] [database-cluster] Payment intent confirmed: id=pi_253513 amount=$75.49
+2026-09-28 13:01:48.212 [DEBUG] [inventory-api] Database query execution: SELECT * FROM items WHERE sku='SKU-189' - 12ms
+2026-09-28 13:01:48.565 [DEBUG] [auth-service] Cache lookup for key 'user_profile:1716' - HIT (2.1ms)
+2026-09-28 13:01:48.918 [DEBUG] [redis-cache] Cache lookup for key 'user_profile:8504' - HIT (2.1ms)
+2026-09-28 13:01:49.270 [DEBUG] [redis-cache] Database query execution: SELECT * FROM items WHERE sku='SKU-931' - 12ms
+2026-09-28 13:01:49.621 [INFO] [auth-service] Payment intent confirmed: id=pi_550269 amount=$308.02
+2026-09-28 13:01:51.473 [ERROR] [inventory-api] OAuth token refresh failed for user_id=9149; prompting re-login
+2026-09-28 13:01:51.974 [WARNING] [inventory-api] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:01:52.475 [WARNING] [database-cluster] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:01:55.977 [ERROR] [redis-cache] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:01:56.092 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:01:56.189 [ERROR] [order-processor] Transaction deadlock detected while processing order #874159; rolled back
+2026-09-28 13:01:56.271 [CRITICAL] [database-cluster] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:01:56.367 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_9005
+2026-09-28 13:01:56.438 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_3757
+2026-09-28 13:01:56.534 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:01:56.662 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:01:56.754 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_5559
+2026-09-28 13:01:56.833 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_5430
+2026-09-28 13:01:56.949 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:01:57.069 [CRITICAL] [payment-gateway] Security event: potential brute-force authentication spike detected for user_9663
+2026-09-28 13:01:57.175 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:01:57.253 [ERROR] [redis-cache] Transaction deadlock detected while processing order #442166; rolled back
+2026-09-28 13:01:57.382 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:01:57.502 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:01:57.636 [INFO] [order-processor] Notification dispatched to user_3569@example.com via SES
+2026-09-28 13:01:58.138 [DEBUG] [order-processor] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:01:58.638 [INFO] [order-processor] Payment intent confirmed: id=pi_909432 amount=$419.39
+2026-09-28 13:01:59.140 [INFO] [auth-service] Inventory reservation confirmed for SKU: SKU-855 qty=1
+2026-09-28 13:01:59.641 [INFO] [auth-service] Payment intent confirmed: id=pi_424143 amount=$406.25
+2026-09-28 13:02:00.143 [INFO] [redis-cache] User session verified: user_id=9564 token_type=Bearer
+2026-09-28 13:02:00.644 [DEBUG] [auth-service] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:02:01.145 [INFO] [database-cluster] Payment intent confirmed: id=pi_322111 amount=$439.88
+2026-09-28 13:02:01.648 [INFO] [api-gateway] Payment intent confirmed: id=pi_928781 amount=$444.57
+2026-09-28 13:02:02.150 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-139' - 12ms
+2026-09-28 13:02:02.651 [INFO] [inventory-api] Order #775430 status updated to PROCESSING
+2026-09-28 13:02:03.153 [INFO] [database-cluster] Notification dispatched to user_1332@example.com via SES
+2026-09-28 13:02:03.654 [INFO] [order-processor] Notification dispatched to user_5988@example.com via SES
+2026-09-28 13:02:04.155 [DEBUG] [order-processor] Cache lookup for key 'user_profile:5141' - HIT (2.1ms)
+2026-09-28 13:02:04.656 [INFO] [api-gateway] Inventory reservation confirmed for SKU: SKU-210 qty=1
+2026-09-28 13:52:35.484 [DEBUG] [notification-worker] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:52:35.835 [INFO] [auth-service] User session verified: user_id=1772 token_type=Bearer
+2026-09-28 13:52:36.189 [DEBUG] [api-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:52:36.540 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-438' - 12ms
+2026-09-28 13:52:36.893 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-467' - 12ms
+2026-09-28 13:52:37.246 [INFO] [notification-worker] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:52:37.597 [INFO] [order-processor] Inventory reservation confirmed for SKU: SKU-647 qty=1
+2026-09-28 13:52:37.948 [INFO] [auth-service] Payment intent confirmed: id=pi_793223 amount=$431.91
+2026-09-28 13:52:38.300 [INFO] [auth-service] Order #817333 status updated to PROCESSING
+2026-09-28 13:52:38.653 [INFO] [order-processor] Payment intent confirmed: id=pi_670225 amount=$409.35
+2026-09-28 13:52:39.007 [DEBUG] [auth-service] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:52:39.358 [DEBUG] [inventory-api] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:52:39.709 [DEBUG] [redis-cache] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:52:40.061 [INFO] [payment-gateway] Notification dispatched to user_4121@example.com via SES
+2026-09-28 13:52:40.413 [INFO] [database-cluster] Payment intent confirmed: id=pi_560318 amount=$321.30
+2026-09-28 13:52:40.764 [INFO] [redis-cache] Payment intent confirmed: id=pi_111561 amount=$24.00
+2026-09-28 13:52:41.117 [DEBUG] [inventory-api] Cache lookup for key 'user_profile:7343' - HIT (2.1ms)
+2026-09-28 13:52:41.469 [INFO] [notification-worker] User session verified: user_id=2620 token_type=Bearer
+2026-09-28 13:52:43.322 [ERROR] [inventory-api] OAuth token refresh failed for user_id=7597; prompting re-login
+2026-09-28 13:52:43.826 [ERROR] [inventory-api] OAuth token refresh failed for user_id=1167; prompting re-login
+2026-09-28 13:52:44.327 [WARNING] [inventory-api] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:52:47.830 [ERROR] [database-cluster] Transaction deadlock detected while processing order #684164; rolled back
+2026-09-28 13:52:57.479 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:5123' - HIT (2.1ms)
+2026-09-28 13:52:57.829 [INFO] [inventory-api] Payment intent confirmed: id=pi_527279 amount=$128.57
+2026-09-28 13:52:58.185 [INFO] [database-cluster] Payment intent confirmed: id=pi_456504 amount=$136.85
+2026-09-28 13:52:58.539 [INFO] [order-processor] Payment intent confirmed: id=pi_675266 amount=$299.34
+2026-09-28 13:52:58.891 [DEBUG] [inventory-api] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:52:59.244 [DEBUG] [auth-service] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:52:59.596 [INFO] [auth-service] Payment intent confirmed: id=pi_335343 amount=$359.39
+2026-09-28 13:52:59.949 [DEBUG] [api-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:00.302 [INFO] [payment-gateway] Inventory reservation confirmed for SKU: SKU-590 qty=1
+2026-09-28 13:53:00.653 [DEBUG] [redis-cache] Database query execution: SELECT * FROM items WHERE sku='SKU-285' - 12ms
+2026-09-28 13:53:01.006 [INFO] [notification-worker] Payment intent confirmed: id=pi_200706 amount=$391.00
+2026-09-28 13:53:01.357 [DEBUG] [payment-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:53:01.708 [DEBUG] [order-processor] Cache lookup for key 'user_profile:1607' - HIT (2.1ms)
+2026-09-28 13:53:02.060 [INFO] [inventory-api] User session verified: user_id=3220 token_type=Bearer
+2026-09-28 13:53:02.412 [INFO] [database-cluster] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:53:02.763 [DEBUG] [redis-cache] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:53:03.114 [INFO] [redis-cache] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:53:03.466 [DEBUG] [inventory-api] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:05.318 [WARNING] [inventory-api] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:53:05.824 [WARNING] [inventory-api] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:53:06.327 [WARNING] [database-cluster] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 13:53:09.829 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:53:09.965 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_1760
+2026-09-28 13:53:10.050 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_7347
+2026-09-28 13:53:10.144 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:53:10.232 [ERROR] [payment-gateway] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 13:53:10.335 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:53:10.474 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:53:10.538 [ERROR] [database-cluster] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:53:10.671 [ERROR] [order-processor] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 13:53:10.733 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:53:10.819 [CRITICAL] [payment-gateway] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:53:10.910 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:53:11.031 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:53:11.156 [ERROR] [database-cluster] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:53:11.274 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_6103
+2026-09-28 13:53:11.362 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:53:11.463 [DEBUG] [payment-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:11.964 [INFO] [inventory-api] Order #392047 status updated to PROCESSING
+2026-09-28 13:53:12.465 [DEBUG] [auth-service] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:53:12.967 [DEBUG] [database-cluster] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:13.469 [INFO] [payment-gateway] Notification dispatched to user_8030@example.com via SES
+2026-09-28 13:53:13.972 [INFO] [notification-worker] Notification dispatched to user_7207@example.com via SES
+2026-09-28 13:53:14.473 [DEBUG] [payment-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-177' - 12ms
+2026-09-28 13:53:14.975 [INFO] [order-processor] Payment intent confirmed: id=pi_835945 amount=$286.52
+2026-09-28 13:53:15.476 [INFO] [api-gateway] Notification dispatched to user_9734@example.com via SES
+2026-09-28 13:53:15.978 [DEBUG] [notification-worker] Database query execution: SELECT * FROM items WHERE sku='SKU-140' - 12ms
+2026-09-28 13:53:16.481 [INFO] [auth-service] User session verified: user_id=6319 token_type=Bearer
+2026-09-28 13:53:16.982 [INFO] [auth-service] User session verified: user_id=8012 token_type=Bearer
+2026-09-28 13:53:17.483 [DEBUG] [database-cluster] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:17.985 [DEBUG] [api-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 13:53:18.488 [INFO] [redis-cache] Order #840829 status updated to PROCESSING
+2026-09-28 13:56:19.172 [INFO] [notification-worker] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:56:19.523 [DEBUG] [payment-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:19.874 [INFO] [payment-gateway] Order #554399 status updated to PROCESSING
+2026-09-28 13:56:20.228 [INFO] [auth-service] Order #470647 status updated to PROCESSING
+2026-09-28 13:56:20.580 [INFO] [payment-gateway] Payment intent confirmed: id=pi_405839 amount=$128.23
+2026-09-28 13:56:20.933 [DEBUG] [order-processor] Database query execution: SELECT * FROM items WHERE sku='SKU-637' - 12ms
+2026-09-28 13:56:21.286 [INFO] [auth-service] User session verified: user_id=7622 token_type=Bearer
+2026-09-28 13:56:21.638 [INFO] [api-gateway] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:56:21.992 [DEBUG] [notification-worker] Database query execution: SELECT * FROM items WHERE sku='SKU-837' - 12ms
+2026-09-28 13:56:22.344 [INFO] [auth-service] User session verified: user_id=8027 token_type=Bearer
+2026-09-28 13:56:22.697 [DEBUG] [redis-cache] Cache lookup for key 'user_profile:3378' - HIT (2.1ms)
+2026-09-28 13:56:23.049 [DEBUG] [redis-cache] Cache lookup for key 'user_profile:9483' - HIT (2.1ms)
+2026-09-28 13:56:23.400 [DEBUG] [database-cluster] Cache lookup for key 'user_profile:3056' - HIT (2.1ms)
+2026-09-28 13:56:23.752 [DEBUG] [notification-worker] Database query execution: SELECT * FROM items WHERE sku='SKU-977' - 12ms
+2026-09-28 13:56:24.103 [INFO] [order-processor] Payment intent confirmed: id=pi_450635 amount=$405.24
+2026-09-28 13:56:24.455 [INFO] [auth-service] Inventory reservation confirmed for SKU: SKU-339 qty=1
+2026-09-28 13:56:24.807 [DEBUG] [inventory-api] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:25.159 [INFO] [api-gateway] Notification dispatched to user_1218@example.com via SES
+2026-09-28 13:56:27.012 [WARNING] [database-cluster] Memory utilization warning: worker process heap at 78%
+2026-09-28 13:56:27.517 [ERROR] [inventory-api] OAuth token refresh failed for user_id=2202; prompting re-login
+2026-09-28 13:56:28.021 [WARNING] [database-cluster] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 13:56:31.522 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:56:31.640 [CRITICAL] [payment-gateway] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:56:31.766 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:56:31.846 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:56:31.941 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 13:56:32.028 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_7498
+2026-09-28 13:56:32.160 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:56:32.240 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_7082
+2026-09-28 13:56:32.320 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 13:56:32.391 [ERROR] [database-cluster] Transaction deadlock detected while processing order #621443; rolled back
+2026-09-28 13:56:32.509 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:56:32.649 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_1248
+2026-09-28 13:56:32.772 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:56:32.898 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 13:56:32.983 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 13:56:33.092 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_8096
+2026-09-28 13:56:33.208 [DEBUG] [payment-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-633' - 12ms
+2026-09-28 13:56:33.710 [INFO] [auth-service] Order #778399 status updated to PROCESSING
+2026-09-28 13:56:34.211 [DEBUG] [notification-worker] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:34.712 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 13:56:35.213 [DEBUG] [database-cluster] Database query execution: SELECT * FROM items WHERE sku='SKU-851' - 12ms
+2026-09-28 13:56:35.717 [INFO] [redis-cache] Notification dispatched to user_6176@example.com via SES
+2026-09-28 13:56:36.219 [INFO] [notification-worker] User session verified: user_id=8438 token_type=Bearer
+2026-09-28 13:56:36.722 [INFO] [notification-worker] User session verified: user_id=8816 token_type=Bearer
+2026-09-28 13:56:37.224 [DEBUG] [database-cluster] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:37.727 [DEBUG] [redis-cache] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:38.230 [INFO] [payment-gateway] Notification dispatched to user_7158@example.com via SES
+2026-09-28 13:56:38.739 [DEBUG] [auth-service] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 13:56:39.240 [INFO] [api-gateway] Order #836800 status updated to PROCESSING
+2026-09-28 13:56:39.743 [INFO] [redis-cache] Payment intent confirmed: id=pi_791533 amount=$28.23
+2026-09-28 13:56:40.244 [INFO] [inventory-api] Inventory reservation confirmed for SKU: SKU-160 qty=1
+2026-09-28 14:04:40.007 [INFO] [inventory-api] Inventory reservation confirmed for SKU: SKU-877 qty=1
+2026-09-28 14:04:40.357 [INFO] [order-processor] Inventory reservation confirmed for SKU: SKU-164 qty=1
+2026-09-28 14:04:40.711 [DEBUG] [auth-service] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 14:04:41.063 [INFO] [inventory-api] Order #879154 status updated to PROCESSING
+2026-09-28 14:04:41.414 [INFO] [database-cluster] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 14:04:41.765 [DEBUG] [notification-worker] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 14:04:42.118 [INFO] [payment-gateway] User session verified: user_id=7705 token_type=Bearer
+2026-09-28 14:04:42.471 [INFO] [auth-service] Payment intent confirmed: id=pi_525213 amount=$193.28
+2026-09-28 14:04:42.823 [INFO] [api-gateway] User session verified: user_id=9706 token_type=Bearer
+2026-09-28 14:04:43.175 [DEBUG] [payment-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-855' - 12ms
+2026-09-28 14:04:43.526 [INFO] [redis-cache] Inventory reservation confirmed for SKU: SKU-711 qty=1
+2026-09-28 14:04:43.877 [DEBUG] [redis-cache] Database query execution: SELECT * FROM items WHERE sku='SKU-579' - 12ms
+2026-09-28 14:04:44.229 [INFO] [notification-worker] Payment intent confirmed: id=pi_743652 amount=$227.67
+2026-09-28 14:04:44.582 [DEBUG] [order-processor] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 14:04:44.935 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:3215' - HIT (2.1ms)
+2026-09-28 14:04:45.285 [INFO] [notification-worker] Inventory reservation confirmed for SKU: SKU-276 qty=1
+2026-09-28 14:04:45.645 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-175' - 12ms
+2026-09-28 14:04:45.998 [INFO] [api-gateway] Order #191167 status updated to PROCESSING
+2026-09-28 14:04:47.849 [ERROR] [database-cluster] Transient socket timeout contacting inventory-service; retrying attempt 1/3
+2026-09-28 14:04:48.350 [ERROR] [inventory-api] Transient socket timeout contacting inventory-service; retrying attempt 1/3
+2026-09-28 14:04:48.852 [ERROR] [inventory-api] Transient socket timeout contacting inventory-service; retrying attempt 1/3
+2026-09-28 14:04:52.354 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 14:04:52.445 [ERROR] [database-cluster] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 14:04:52.543 [ERROR] [redis-cache] Transaction deadlock detected while processing order #984103; rolled back
+2026-09-28 14:04:52.627 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 14:04:52.693 [ERROR] [order-processor] Transaction deadlock detected while processing order #961551; rolled back
+2026-09-28 14:04:52.803 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_2001
+2026-09-28 14:04:52.884 [ERROR] [payment-gateway] Transaction deadlock detected while processing order #512273; rolled back
+2026-09-28 14:04:52.964 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 14:04:53.086 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 14:04:53.230 [CRITICAL] [payment-gateway] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 14:04:53.323 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 14:04:53.411 [ERROR] [redis-cache] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 14:04:53.529 [CRITICAL] [payment-gateway] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 14:04:53.627 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_4460
+2026-09-28 14:04:53.697 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 14:04:53.769 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 14:04:53.854 [INFO] [inventory-api] Inventory reservation confirmed for SKU: SKU-771 qty=1
+2026-09-28 14:04:54.355 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:5774' - HIT (2.1ms)
+2026-09-28 14:04:54.856 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-866' - 12ms
+2026-09-28 14:04:55.358 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-411' - 12ms
+2026-09-28 14:04:55.858 [DEBUG] [auth-service] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 14:04:56.361 [INFO] [inventory-api] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 14:04:56.864 [DEBUG] [order-processor] Database query execution: SELECT * FROM items WHERE sku='SKU-787' - 12ms
+2026-09-28 14:04:57.365 [INFO] [database-cluster] Payment intent confirmed: id=pi_536672 amount=$274.28
+2026-09-28 14:04:57.866 [DEBUG] [database-cluster] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 14:04:58.370 [INFO] [redis-cache] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 14:04:58.871 [DEBUG] [api-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 14:04:59.373 [INFO] [redis-cache] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 14:04:59.874 [INFO] [api-gateway] Order #965181 status updated to PROCESSING
+2026-09-28 14:05:00.375 [INFO] [auth-service] Notification dispatched to user_2573@example.com via SES
+2026-09-28 14:05:00.878 [INFO] [payment-gateway] Notification dispatched to user_7175@example.com via SES
+2026-09-28 15:30:27.638 [INFO] [inventory-api] Payment intent confirmed: id=pi_302775 amount=$129.43
+2026-09-28 15:30:27.989 [INFO] [database-cluster] Payment intent confirmed: id=pi_282872 amount=$227.83
+2026-09-28 15:30:28.341 [INFO] [auth-service] Order #349720 status updated to PROCESSING
+2026-09-28 15:30:28.692 [DEBUG] [database-cluster] Database query execution: SELECT * FROM items WHERE sku='SKU-971' - 12ms
+2026-09-28 15:30:29.048 [INFO] [order-processor] Notification dispatched to user_9682@example.com via SES
+2026-09-28 15:30:29.399 [INFO] [order-processor] Payment intent confirmed: id=pi_544146 amount=$432.84
+2026-09-28 15:30:29.750 [INFO] [database-cluster] Inventory reservation confirmed for SKU: SKU-110 qty=1
+2026-09-28 15:30:30.101 [DEBUG] [api-gateway] Cache lookup for key 'user_profile:5939' - HIT (2.1ms)
+2026-09-28 15:30:30.452 [DEBUG] [redis-cache] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:30:30.804 [INFO] [notification-worker] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:30:31.155 [INFO] [payment-gateway] Order #630116 status updated to PROCESSING
+2026-09-28 15:30:31.507 [INFO] [inventory-api] User session verified: user_id=3516 token_type=Bearer
+2026-09-28 15:30:31.859 [INFO] [notification-worker] Notification dispatched to user_2131@example.com via SES
+2026-09-28 15:30:32.210 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-455' - 12ms
+2026-09-28 15:30:32.561 [INFO] [api-gateway] Notification dispatched to user_9858@example.com via SES
+2026-09-28 15:30:32.913 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-833' - 12ms
+2026-09-28 15:30:33.264 [INFO] [redis-cache] Payment intent confirmed: id=pi_624972 amount=$236.55
+2026-09-28 15:30:33.615 [DEBUG] [notification-worker] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:30:35.470 [WARNING] [database-cluster] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:30:35.971 [ERROR] [inventory-api] OAuth token refresh failed for user_id=2335; prompting re-login
+2026-09-28 15:30:36.473 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:30:39.975 [ERROR] [order-processor] Transaction deadlock detected while processing order #749972; rolled back
+2026-09-28 15:30:40.094 [ERROR] [order-processor] Transaction deadlock detected while processing order #431961; rolled back
+2026-09-28 15:30:40.193 [ERROR] [order-processor] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:30:40.286 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:30:40.356 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:30:40.421 [ERROR] [database-cluster] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:30:40.534 [ERROR] [payment-gateway] Transaction deadlock detected while processing order #186637; rolled back
+2026-09-28 15:30:40.645 [CRITICAL] [redis-cache] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:30:40.759 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:30:40.848 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:30:40.958 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_4240
+2026-09-28 15:30:41.028 [ERROR] [payment-gateway] Transaction deadlock detected while processing order #184981; rolled back
+2026-09-28 15:30:41.154 [CRITICAL] [payment-gateway] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:30:41.235 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:30:41.298 [ERROR] [order-processor] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:30:41.410 [ERROR] [order-processor] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:30:41.474 [INFO] [database-cluster] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:30:41.975 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-233' - 12ms
+2026-09-28 15:30:42.477 [INFO] [api-gateway] Payment intent confirmed: id=pi_499957 amount=$34.13
+2026-09-28 15:30:42.978 [INFO] [api-gateway] Inventory reservation confirmed for SKU: SKU-578 qty=1
+2026-09-28 15:30:43.479 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:30:43.980 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:9511' - HIT (2.1ms)
+2026-09-28 15:30:44.481 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:2571' - HIT (2.1ms)
+2026-09-28 15:30:44.982 [INFO] [redis-cache] Notification dispatched to user_4929@example.com via SES
+2026-09-28 15:30:45.483 [INFO] [inventory-api] Order #877924 status updated to PROCESSING
+2026-09-28 15:30:45.984 [INFO] [payment-gateway] Notification dispatched to user_5885@example.com via SES
+2026-09-28 15:30:46.485 [INFO] [auth-service] Inventory reservation confirmed for SKU: SKU-610 qty=1
+2026-09-28 15:30:46.988 [DEBUG] [database-cluster] Database query execution: SELECT * FROM items WHERE sku='SKU-886' - 12ms
+2026-09-28 15:30:47.488 [INFO] [inventory-api] Payment intent confirmed: id=pi_258503 amount=$30.22
+2026-09-28 15:30:47.989 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-370' - 12ms
+2026-09-28 15:30:48.491 [INFO] [auth-service] Order #258993 status updated to PROCESSING
+2026-09-28 15:33:36.494 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:33:36.845 [INFO] [redis-cache] Inventory reservation confirmed for SKU: SKU-116 qty=1
+2026-09-28 15:33:37.196 [INFO] [auth-service] User session verified: user_id=5760 token_type=Bearer
+2026-09-28 15:33:37.547 [DEBUG] [database-cluster] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:33:37.898 [INFO] [database-cluster] Payment intent confirmed: id=pi_192832 amount=$217.05
+2026-09-28 15:33:38.251 [DEBUG] [redis-cache] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:33:38.602 [DEBUG] [inventory-api] Cache lookup for key 'user_profile:3199' - HIT (2.1ms)
+2026-09-28 15:33:38.955 [INFO] [payment-gateway] Inventory reservation confirmed for SKU: SKU-652 qty=1
+2026-09-28 15:33:39.306 [INFO] [inventory-api] Payment intent confirmed: id=pi_726932 amount=$217.93
+2026-09-28 15:33:39.658 [INFO] [notification-worker] Payment intent confirmed: id=pi_739463 amount=$235.98
+2026-09-28 15:33:40.009 [INFO] [inventory-api] Order #591799 status updated to PROCESSING
+2026-09-28 15:33:40.361 [INFO] [auth-service] Notification dispatched to user_2751@example.com via SES
+2026-09-28 15:33:40.712 [DEBUG] [auth-service] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:33:41.063 [INFO] [order-processor] Inventory reservation confirmed for SKU: SKU-679 qty=1
+2026-09-28 15:33:41.414 [INFO] [payment-gateway] Notification dispatched to user_5569@example.com via SES
+2026-09-28 15:33:41.765 [DEBUG] [notification-worker] Cache lookup for key 'user_profile:3712' - HIT (2.1ms)
+2026-09-28 15:33:42.117 [INFO] [payment-gateway] User session verified: user_id=6908 token_type=Bearer
+2026-09-28 15:33:42.469 [INFO] [payment-gateway] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:33:44.322 [ERROR] [database-cluster] OAuth token refresh failed for user_id=7953; prompting re-login
+2026-09-28 15:33:44.824 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:33:45.325 [ERROR] [database-cluster] Transient socket timeout contacting inventory-service; retrying attempt 1/3
+2026-09-28 15:33:48.829 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:33:48.949 [ERROR] [payment-gateway] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:33:49.031 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:33:49.133 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:33:49.279 [ERROR] [database-cluster] Transaction deadlock detected while processing order #259185; rolled back
+2026-09-28 15:33:49.403 [CRITICAL] [redis-cache] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:33:49.530 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:33:49.605 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:33:49.706 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:33:49.804 [CRITICAL] [database-cluster] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:33:49.912 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:33:50.051 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_5086
+2026-09-28 15:33:50.160 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:33:50.263 [CRITICAL] [payment-gateway] Security event: potential brute-force authentication spike detected for user_3255
+2026-09-28 15:33:50.392 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:33:50.519 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:33:50.606 [INFO] [payment-gateway] Payment intent confirmed: id=pi_907064 amount=$409.13
+2026-09-28 15:33:51.108 [DEBUG] [auth-service] Cache lookup for key 'user_profile:5537' - HIT (2.1ms)
+2026-09-28 15:33:51.610 [INFO] [database-cluster] Order #724605 status updated to PROCESSING
+2026-09-28 15:33:52.112 [DEBUG] [api-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:33:52.614 [DEBUG] [payment-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:33:53.116 [DEBUG] [order-processor] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:33:53.619 [INFO] [inventory-api] User session verified: user_id=2874 token_type=Bearer
+2026-09-28 15:33:54.121 [INFO] [database-cluster] Inventory reservation confirmed for SKU: SKU-511 qty=1
+2026-09-28 15:33:54.622 [DEBUG] [api-gateway] Database query execution: SELECT * FROM items WHERE sku='SKU-709' - 12ms
+2026-09-28 15:33:55.123 [DEBUG] [database-cluster] Cache lookup for key 'user_profile:5064' - HIT (2.1ms)
+2026-09-28 15:33:55.625 [DEBUG] [api-gateway] Cache lookup for key 'user_profile:8329' - HIT (2.1ms)
+2026-09-28 15:33:56.127 [INFO] [api-gateway] Payment intent confirmed: id=pi_203352 amount=$409.38
+2026-09-28 15:33:56.628 [INFO] [redis-cache] Payment intent confirmed: id=pi_592733 amount=$298.63
+2026-09-28 15:33:57.129 [INFO] [auth-service] Payment intent confirmed: id=pi_463843 amount=$359.17
+2026-09-28 15:33:57.630 [INFO] [database-cluster] Order #705568 status updated to PROCESSING
+2026-09-28 15:35:17.564 [INFO] [payment-gateway] User session verified: user_id=6144 token_type=Bearer
+2026-09-28 15:35:17.915 [INFO] [redis-cache] Order #973795 status updated to PROCESSING
+2026-09-28 15:35:18.266 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:18.617 [INFO] [inventory-api] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:18.969 [DEBUG] [inventory-api] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:35:19.328 [DEBUG] [auth-service] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:35:19.679 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:20.030 [DEBUG] [payment-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:35:20.382 [INFO] [database-cluster] Notification dispatched to user_5447@example.com via SES
+2026-09-28 15:35:20.732 [DEBUG] [notification-worker] Cache lookup for key 'user_profile:5309' - HIT (2.1ms)
+2026-09-28 15:35:21.083 [INFO] [database-cluster] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:21.435 [DEBUG] [redis-cache] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:35:21.786 [DEBUG] [notification-worker] Cache lookup for key 'user_profile:1958' - HIT (2.1ms)
+2026-09-28 15:35:22.138 [DEBUG] [database-cluster] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:35:22.490 [INFO] [auth-service] Order #850232 status updated to PROCESSING
+2026-09-28 15:35:22.841 [INFO] [payment-gateway] Order #462631 status updated to PROCESSING
+2026-09-28 15:35:23.192 [INFO] [notification-worker] Order #811012 status updated to PROCESSING
+2026-09-28 15:35:23.543 [INFO] [redis-cache] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:25.395 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:35:25.896 [WARNING] [database-cluster] Memory utilization warning: worker process heap at 78%
+2026-09-28 15:35:26.397 [WARNING] [database-cluster] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:35:29.900 [ERROR] [order-processor] Transaction deadlock detected while processing order #541586; rolled back
+2026-09-28 15:35:30.010 [ERROR] [redis-cache] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:35:30.152 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:35:30.274 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_8003
+2026-09-28 15:35:30.358 [CRITICAL] [database-cluster] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:35:30.479 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:35:30.563 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:35:30.703 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:35:30.838 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:35:30.903 [CRITICAL] [payment-gateway] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:35:31.014 [ERROR] [payment-gateway] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:35:31.151 [CRITICAL] [redis-cache] Security event: potential brute-force authentication spike detected for user_7708
+2026-09-28 15:35:31.262 [ERROR] [redis-cache] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:35:31.352 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_5615
+2026-09-28 15:35:31.490 [CRITICAL] [redis-cache] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:35:31.575 [ERROR] [redis-cache] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:35:31.641 [DEBUG] [api-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:35:32.142 [DEBUG] [redis-cache] Database query execution: SELECT * FROM items WHERE sku='SKU-395' - 12ms
+2026-09-28 15:35:32.643 [DEBUG] [order-processor] Cache lookup for key 'user_profile:9185' - HIT (2.1ms)
+2026-09-28 15:35:33.144 [DEBUG] [notification-worker] Cache lookup for key 'user_profile:1125' - HIT (2.1ms)
+2026-09-28 15:35:33.647 [INFO] [notification-worker] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:34.148 [INFO] [api-gateway] User session verified: user_id=7555 token_type=Bearer
+2026-09-28 15:35:34.650 [INFO] [redis-cache] Order #851289 status updated to PROCESSING
+2026-09-28 15:35:35.158 [DEBUG] [api-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:35:35.659 [INFO] [auth-service] Inventory reservation confirmed for SKU: SKU-701 qty=1
+2026-09-28 15:35:36.160 [INFO] [api-gateway] Payment intent confirmed: id=pi_570949 amount=$359.07
+2026-09-28 15:35:36.661 [INFO] [api-gateway] Order #933925 status updated to PROCESSING
+2026-09-28 15:35:37.162 [INFO] [payment-gateway] Order #782269 status updated to PROCESSING
+2026-09-28 15:35:37.663 [INFO] [notification-worker] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:35:38.164 [INFO] [database-cluster] Inventory reservation confirmed for SKU: SKU-364 qty=1
+2026-09-28 15:35:38.666 [INFO] [redis-cache] Order #705519 status updated to PROCESSING
+2026-09-28 15:43:41.064 [DEBUG] [redis-cache] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:43:41.415 [INFO] [payment-gateway] User session verified: user_id=4272 token_type=Bearer
+2026-09-28 15:43:41.765 [INFO] [auth-service] Payment intent confirmed: id=pi_378844 amount=$57.15
+2026-09-28 15:43:42.116 [INFO] [redis-cache] Inventory reservation confirmed for SKU: SKU-947 qty=1
+2026-09-28 15:43:42.467 [INFO] [order-processor] Order #438477 status updated to PROCESSING
+2026-09-28 15:43:42.818 [DEBUG] [order-processor] Cache lookup for key 'user_profile:5936' - HIT (2.1ms)
+2026-09-28 15:43:43.169 [DEBUG] [payment-gateway] Cache lookup for key 'user_profile:5516' - HIT (2.1ms)
+2026-09-28 15:43:43.520 [DEBUG] [payment-gateway] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:43:43.872 [INFO] [notification-worker] Payment intent confirmed: id=pi_800242 amount=$366.23
+2026-09-28 15:43:44.223 [INFO] [database-cluster] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:43:44.574 [INFO] [redis-cache] Notification dispatched to user_8421@example.com via SES
+2026-09-28 15:43:44.927 [INFO] [notification-worker] User session verified: user_id=4404 token_type=Bearer
+2026-09-28 15:43:45.278 [INFO] [inventory-api] Payment intent confirmed: id=pi_978551 amount=$376.24
+2026-09-28 15:43:45.631 [DEBUG] [auth-service] Database query execution: SELECT * FROM items WHERE sku='SKU-377' - 12ms
+2026-09-28 15:43:45.985 [DEBUG] [notification-worker] Garbage collection completed: reclaimed 142MB in 8.2ms
+2026-09-28 15:43:46.340 [INFO] [notification-worker] Inventory reservation confirmed for SKU: SKU-146 qty=1
+2026-09-28 15:43:46.789 [DEBUG] [notification-worker] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:43:47.154 [DEBUG] [notification-worker] Database query execution: SELECT * FROM items WHERE sku='SKU-215' - 12ms
+2026-09-28 15:43:49.016 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:43:49.560 [WARNING] [inventory-api] Slow query detected on database-replica: execution took 1240ms
+2026-09-28 15:43:50.064 [ERROR] [inventory-api] OAuth token refresh failed for user_id=5467; prompting re-login
+2026-09-28 15:43:53.566 [ERROR] [payment-gateway] Transaction deadlock detected while processing order #878476; rolled back
+2026-09-28 15:43:53.690 [CRITICAL] [order-processor] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:43:53.821 [ERROR] [database-cluster] Database connection pool exhausted: 100/100 active connections in use
+2026-09-28 15:43:53.937 [ERROR] [database-cluster] Transaction deadlock detected while processing order #965766; rolled back
+2026-09-28 15:43:54.059 [ERROR] [database-cluster] Transaction deadlock detected while processing order #470741; rolled back
+2026-09-28 15:43:54.149 [CRITICAL] [database-cluster] Security event: potential brute-force authentication spike detected for user_4998
+2026-09-28 15:43:54.239 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:43:54.348 [CRITICAL] [database-cluster] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:43:54.483 [ERROR] [redis-cache] Transaction deadlock detected while processing order #925204; rolled back
+2026-09-28 15:43:54.590 [CRITICAL] [payment-gateway] Payment gateway upstream timeout: 504 Gateway Timeout from payment-provider-relay
+2026-09-28 15:43:54.724 [ERROR] [order-processor] Redis connection refused: ConnectionResetError(10054, 'Host unreachable')
+2026-09-28 15:43:54.864 [ERROR] [database-cluster] Transaction deadlock detected while processing order #684825; rolled back
+2026-09-28 15:43:54.986 [CRITICAL] [order-processor] Out of memory alert: Heap usage reached 98.4% (threshold: 90%)
+2026-09-28 15:43:55.057 [CRITICAL] [order-processor] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:43:55.167 [CRITICAL] [database-cluster] Cascading circuit breaker TRIPPED for order-processor: failure rate 82%
+2026-09-28 15:43:55.255 [CRITICAL] [order-processor] Security event: potential brute-force authentication spike detected for user_9487
+2026-09-28 15:43:55.361 [DEBUG] [order-processor] Database query execution: SELECT * FROM items WHERE sku='SKU-431' - 12ms
+2026-09-28 15:43:55.862 [INFO] [redis-cache] Payment intent confirmed: id=pi_691232 amount=$418.89
+2026-09-28 15:43:56.363 [DEBUG] [inventory-api] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:43:56.864 [INFO] [payment-gateway] User session verified: user_id=9227 token_type=Bearer
+2026-09-28 15:43:57.365 [INFO] [redis-cache] User session verified: user_id=7911 token_type=Bearer
+2026-09-28 15:43:57.866 [DEBUG] [database-cluster] Cache lookup for key 'user_profile:9521' - HIT (2.1ms)
+2026-09-28 15:43:58.367 [INFO] [order-processor] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:43:58.868 [INFO] [auth-service] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:43:59.369 [INFO] [inventory-api] Notification dispatched to user_7723@example.com via SES
+2026-09-28 15:43:59.872 [INFO] [api-gateway] HTTP 200 OK: GET /api/v2/catalog response_time=18ms
+2026-09-28 15:44:00.375 [INFO] [order-processor] Order #922469 status updated to PROCESSING
+2026-09-28 15:44:00.882 [DEBUG] [payment-gateway] Health check probe OK from 10.0.4.12: latency 1.4ms
+2026-09-28 15:44:01.384 [INFO] [inventory-api] User session verified: user_id=9600 token_type=Bearer
+2026-09-28 15:44:01.887 [INFO] [notification-worker] Order #303800 status updated to PROCESSING
+2026-09-28 15:44:02.388 [INFO] [redis-cache] Payment intent confirmed: id=pi_535838 amount=$402.31
