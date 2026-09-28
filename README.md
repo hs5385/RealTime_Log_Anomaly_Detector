@@ -63,7 +63,7 @@ An enterprise-grade, real-time log anomaly detection engine and observability da
 pip install -r requirements.txt
 ```
 
-### 2. Configure AWS (Optional)
+### 2. Configure AWS 
 If you wish to stream alerts to an AWS SNS topic or CloudWatch Logs:
 ```powershell
 $env:AWS_SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:123456789012:MyAlertTopic"
