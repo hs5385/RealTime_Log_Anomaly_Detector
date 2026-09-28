@@ -66,9 +66,9 @@ pip install -r requirements.txt
 ### 2. Configure AWS 
 If you wish to stream alerts to an AWS SNS topic or CloudWatch Logs:
 ```powershell
-$env:AWS_SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:123456789012:MyAlertTopic"
+$env:AWS_SNS_TOPIC_ARN = "Your topic"
 $env:AWS_CLOUDWATCH_GROUP = "/aws/events/log-anomalies"
-$env:AWS_DEFAULT_REGION = "us-east-1"
+$env:AWS_DEFAULT_REGION = "Your region"
 ```
 *(If credentials are unconfigured or invalid, the detector automatically falls back to local simulation mode).*
 
