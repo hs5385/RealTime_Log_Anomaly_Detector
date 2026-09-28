@@ -42,7 +42,7 @@ An enterprise-grade, real-time log anomaly detection engine and observability da
 
 ---
 
-## 📁 Project Structure
+## 📁 PROJECT STRUCTURE
 
 ```
 ├── app.log              # Target log file monitored in real time
